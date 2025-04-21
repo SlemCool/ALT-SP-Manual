@@ -52,7 +52,7 @@ apt-get install -y newt52
 
 #### Устанавливаем всё скриптом(Если руками то пропустить этот шаг)
 ```bash
-sh /opt/install_script_alt.sh.sh
+sh /opt/install_script_alt.sh
 ```
 
 ## Если решили руками. Настройка АРМ

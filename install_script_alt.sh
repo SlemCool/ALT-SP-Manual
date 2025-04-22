@@ -92,12 +92,11 @@ echo "Скачиваем и устанавливаем КриптоПро"
 sshpass -p "$BDPass" scp root@$SERVER_IP:/var/ftp/pub/disp-config/linux-amd64.tgz .
 tar -xf linux-amd64.tgz
 sh ./linux-amd64/install_gui.sh
-
+rm -rf linux-amd64.tgz linux-amd64
 
 
 echo "Создаем папки для монтирования"
 mkdir /mnt/PUBLIC\(DISP\)
-
 mkdir /mnt/PUBLIC\(CLINIC\)
 
 
@@ -133,7 +132,6 @@ chmod 600 /etc/samba/disp_cred
 chmod 600 /etc/samba/clinic_cred
 
 echo "//$DISP_SERVER/public /mnt/PUBLIC(DISP) cifs users,_netdev,nofail,credentials=/etc/samba/disp_cred,file_mode=0777,dir_mode=0777,iocharset=utf8 0 0" | tee -a /etc/fstab
-
 echo "//$CLINIC_SERVER/public /mnt/PUBLIC(CLINIC) cifs users,_netdev,nofail,credentials=/etc/samba/clinic_cred,file_mode=0777,dir_mode=0777,iocharset=utf8 0 0" | tee -a /etc/fstab
 
 mount -a
@@ -149,19 +147,23 @@ echo "Копируем ярлык ПЦЛЛО на рабочий стол"
 sshpass -p "$BDPass" scp root@$SERVER_IP:/var/ftp/pub/disp-config/ПЦЛЛО.desktop "/home/$UserName/Рабочий стол/"
 chmod 777 "/home/$UserName/Рабочий стол/ПЦЛЛО.desktop"
 
+echo "Проверка существования $UserName пользователя"
+if ! id "$UserName" &>/dev/null; then
+    echo "Пользователь $UserName не существует."
+    exit 1
+fi
+
 echo "Устанавливаем Vino VNC"
-apt-get install -y vino-mate
+apt-get install -y vino-mate || { echo "Ошибка установки Vino VNC"; exit 1; }
 
-echo "Выходим из админской сессии"
-exit
-
+echo "Выходим из админской сессии и продолжаем от имени пользователя $UserName"
+sudo -u "$UserName" bash <<EOF
 echo "Настраиваем Vino VNC"
 dconf write /org/gnome/desktop/remote-access/enabled true
 dconf write /org/gnome/desktop/remote-access/require-encryption false
 dconf write /org/gnome/desktop/remote-access/prompt-enabled false
-```
-
 echo "Чиним кодировку в Pluma"
 dconf write /org/mate/pluma/auto-detected-encodings "['UTF-8', 'WINDOWS-1251', 'GBK', 'ISO-8859-15', 'UTF-16']"
+EOF
 
-echo "Установка завершена."
+echo "Установка завершена!"

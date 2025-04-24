@@ -157,13 +157,13 @@ echo "Устанавливаем Vino VNC"
 apt-get install -y vino-mate || { echo "Ошибка установки Vino VNC"; exit 1; }
 
 echo "Выходим из админской сессии и продолжаем от имени пользователя $UserName"
-sudo -u "$UserName" bash <<EOF
-echo "Настраиваем Vino VNC"
+su - "$UserName" -c "
+export DISPLAY=:0
 dconf write /org/gnome/desktop/remote-access/enabled true
 dconf write /org/gnome/desktop/remote-access/require-encryption false
 dconf write /org/gnome/desktop/remote-access/prompt-enabled false
-echo "Чиним кодировку в Pluma"
-dconf write /org/mate/pluma/auto-detected-encodings "['UTF-8', 'WINDOWS-1251', 'GBK', 'ISO-8859-15', 'UTF-16']"
-EOF
+dconf write /org/mate/pluma/auto-detected-encodings \"['UTF-8', 'WINDOWS-1251', 'GBK', 'ISO-8859-15', 'UTF-16']\"
+"
+echo "Настройка Vino VNC завершена!"
 
-echo "Установка завершена!"
+echo "Установка завершена! Перезагрузите АРМ для применения всех изменений."

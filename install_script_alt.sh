@@ -113,6 +113,8 @@ if [ -z "$DispPass" ]; then
     exit 1
 fi
 
+echo
+
 read -p "Введите имя пользователя для паблика Стационара:" ClinicUser
 if [ -z "$ClinicUser" ]; then
     echo "Имя пользователя не может быть пустым."

@@ -84,6 +84,8 @@ rm -f /opt/client_lin.tar.gz
 echo "Копируем конфиг"
 mkdir -p /home/$UserName/.config/samson-vista
 sshpass -p "$BDPass" scp root@$SERVER_IP:/var/ftp/pub/disp-config/S11App.ini /home/$UserName/.config/samson-vista/S11App.ini
+chown -R $UserName:$UserName /home/$UserName/.config/samson-vista
+chmod 775 /home/$UserName/.config/samson-vista/S11App.ini
 
 echo "Устанавливаем Яндекс.Браузер"
 apt-get install -y yandex-browser-stable

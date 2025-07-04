@@ -338,16 +338,23 @@ dconf write /org/gnome/desktop/remote-access/prompt-enabled false
 dconf write /org/mate/pluma/auto-detected-encodings "['UTF-8', 'WINDOWS-1251', 'GBK', 'ISO-8859-15', 'UTF-16']"
 ```
 
-Если не работает то руками в dconf
+    Если не работает то руками в dconf
 
-Перейдите к следующему пути:
-org -> gnome -> desktop -> remote-access
-Найдите параметр require-encryption и отключите его (снимите галочку).
-Заодно поменять настройки для блокнота.
-org -> mate -> pluma -> auto-detected-encodings 
-Пользовательское значение [‘UTF-8’, ‘WINDOWS-1251’, …остальные]
+    Перейдите к следующему пути:
+    org -> gnome -> desktop -> remote-access
+    Найдите параметр require-encryption и отключите его (снимите галочку).
+    Заодно поменять настройки для блокнота.
+    org -> mate -> pluma -> auto-detected-encodings 
+    Пользовательское значение [‘UTF-8’, ‘WINDOWS-1251’, …остальные]
 
 Второй ярлык для Самсона
 
+```bash
 scp root@192.168.16.13:/var/ftp/pub/disp-config/Samson-2.desktop /home/<userName>/Рабочий\ стол/Samson-2.desktop
+```
 
+Ярлык из примонтированной папки
+
+```bash
+ln -s /mnt/PUBLIC\(CLINIC\)/Журнал\ ВК\ 2025 Рабочий\ стол/Журнал\ ВК\ 2025
+```

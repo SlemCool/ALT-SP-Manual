@@ -36,7 +36,9 @@ apt-get install ./cndrvcups-common-3.21-1.x86_64.rpm ./cndrvcups-capt-2.71-1.x86
 ```bash
 touch /etc/udev/rules.d/85-canon-capt.rules && \
 echo 'KERNEL=="lp*", ACTION=="add", ATTRS{product}=="Canon CAPT USB Device", SYMLINK+="usb/capt"' > /etc/udev/rules.d/85-canon-capt.rules && \
-echo 'KERNEL=="lp*", ACTION=="add", ATTRS{product}=="Canon CAPT USB Printer", SYMLINK+="usb/capt"' >> /etc/udev/rules.d/85-canon-capt.rules
+echo 'KERNEL=="lp*", ACTION=="add", ATTRS{product}=="Canon CAPT USB Printer", SYMLINK+="usb/capt"' >> /etc/udev/rules.d/85-canon-capt.rules && \
+echo 'KERNEL=="lp*", ACTION=="add", ATTRS{product}=="LBP6030/6030B/6018L", SYMLINK+="usb/capt"' >> /etc/udev/rules.d/85-canon-capt.rules
+
 ```
 
 7.Указываем udev о необходимости перезагрузить список правил.

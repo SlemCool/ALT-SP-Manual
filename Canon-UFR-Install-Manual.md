@@ -20,7 +20,7 @@ cd linux-UFRIILT-drv-v500-uken/64-bit_Driver/RPM
 
 5.Предварительно установите данные пакеты (возможно часть у вас уже установлена):
 
-``bash
+```bash
 apt-get install libturbojpeg i586-libturbojpeg i586-libbeecrypt7 libbeecrypt7 libbeecrypt-devel i586-libbeecrypt-devel i586-libjbig  libjbig i586-libjbig-devel.32bit jbig-utils libjbig-devel i586-libxml2 libxml2 i586-glibc-core i586-libstdc++6 libstdc++6 libgcrypt20 i586-libgcrypt20 i586-libgcrypt-devel libgcrypt-devel i586-libjpeg.32bit i586-libzstd.32bit libzstd libglade i586-libgladeui2.0.32bit i586-libglade.32bit libglade-devel libncurses i586-libncurses.32bit i586-liblzma.32bit
 ```
 
